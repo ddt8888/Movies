@@ -46,7 +46,6 @@ const Home = () => {
             title={movie.title}
             genres={movie.genres}
             cover={movie.medium_cover_image}
-            summary={movie.summary}
             year={movie.year}
         />
         )
