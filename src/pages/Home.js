@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Movie, Loading } from 'components'
+import { Link, useNavigate } from 'react-router-dom'
+import { Movie, Loading, Input, Button, Menu } from '../components'
 import './home.css'
-import { Input, Button } from "../components";
+// import { Input, Button } from "../components";
 
 const Home = () => {
     const [loading, setLoading] = useState(true)
     const [movies, setMovies] = useState([])
     const [query, setQuery] = useState('')
     const [isSorted, setIsSorted] = useState(-1)
+    const navigate = useNavigate()
+
+    const likes = JSON.parse(sessionStorage.getItem('likes')) || {}
+    console.log(likes)
 
 
     useEffect(() => {
@@ -30,6 +35,17 @@ const Home = () => {
         setIsSorted(isSorted * -1)
     }
 
+    // 사용자가 클릭한 해당 영화에 대한 좋아요 숫자 업데이트하기
+    const updateLikes = (id) => {
+        const likes = JSON.parse(sessionStorage.getItem('likes')) || {}
+
+        if (likes[id] === null || likes[id] === undefined) {
+            likes[id] = 0
+        }
+        likes[id] += 1
+        sessionStorage.setItem('likes', JSON.stringify(likes))
+    }
+
     const homeUI = movies
         .filter(movie => {
             const title = movie.title.toLowerCase()
@@ -41,21 +57,40 @@ const Home = () => {
         .sort((a, b) => {
             return (b.year - a.year) * isSorted;
         })
-        .map(movie => <Movie
-            key={movie.id}
-            title={movie.title}
-            genres={movie.genres}
-            cover={movie.medium_cover_image}
-            year={movie.year}
-        />
+        .map(movie =>
+            <Link key={movie.id}
+                to='/detail'
+                state={{ movie }}
+                style={{ textDecoration: 'none', color: 'white' }}
+                onClick={() => updateLikes(movie.id)}>
+                <Movie
+                    key={movie.id}
+                    title={movie.title}
+                    genres={movie.genres}
+                    cover={movie.medium_cover_image}
+                    year={movie.year}
+                    rating={movie.rating}
+                    likes={likes[movie.id]}
+                />
+            </Link>
         )
+
+    const toRankPage = () => {
+        // 추천 페이지로 이동하기
+        navigate('/recommend', { state: { movies } })
+    }
 
     return (
         <>
             {loading ? <Loading /> : <div className='Home-container'>
-                <Input name='search' type='text' placeholder='Search movies ...' value={query} onChange={handleChange} />
-                <Button handleClick={sortByYear}>정렬</Button>
-                <div className='Home-movies'>{homeUI}</div>
+                <Menu>
+                    <Button handleClick={toRankPage}>Rank</Button>
+                </Menu>
+                <div className='Home-contents'>
+                    <Input name='search' type='text' placeholder='Search movies ...' value={query} onChange={handleChange} />
+                    <Button handleClick={sortByYear}>정렬</Button>
+                    <div className='Home-movies'>{homeUI}</div>
+                </div>
             </div>}
         </>
     )
