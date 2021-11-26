@@ -1,0 +1,39 @@
+[debug] [2021-11-26T02:50:17.350Z] ----------------------------------------------------------------------
+[debug] [2021-11-26T02:50:17.352Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\YJ\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-11-26T02:50:17.352Z] CLI Version:   9.23.0
+[debug] [2021-11-26T02:50:17.352Z] Platform:      win32
+[debug] [2021-11-26T02:50:17.352Z] Node Version:  v14.18.0
+[debug] [2021-11-26T02:50:17.353Z] Time:          Fri Nov 26 2021 11:50:17 GMT+0900 (대한민국 표준시)
+[debug] [2021-11-26T02:50:17.353Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-26T02:50:17.358Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-26T02:50:17.359Z] > authorizing via signed-in user (kimsanghun19@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\YJ\netflix\client
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2021-11-26T02:51:00.841Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2021-11-26T02:51:01.647Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2021-11-26T02:51:01.647Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project netflix-clone-kimsang (Netflix-clone-kimsang) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

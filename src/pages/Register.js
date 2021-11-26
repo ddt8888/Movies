@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import './register.css'
 
-import { Input } from 'components'
-import Button from "../components/Button";
+import { Input, Button, Modal } from 'components'
 
 const Register = () => {
     const [id, setId] = useState('')
     const [password, setPassword] = useState('')
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -27,10 +27,16 @@ const Register = () => {
                 sessionStorage.setItem('user', JSON.stringify({ id, password }))
                 navigate('/home')
             } else {
-                alert('You need to give right user info.')
+                // alert('You need to give right user info.')
+                openModal()
             }
-
         }
+    }
+    const openModal = () => {
+        setOpen(true)
+    }
+    const closeModal = () => {
+        setOpen(false)
     }
 
     return (
@@ -38,6 +44,17 @@ const Register = () => {
             <Input name='id' type='text' placeholder='Type ID...' value={id} onChange={handleChange} /> <br />
             <Input name='password' type='password' placeholder='Type PASSWORD ...' value={password} onChange={handleChange} /><br />
             <Button handleClick={handleRegister}>Register</Button>
+
+            {/* 모달창 */}
+            <Modal open={open}>
+                <div className="header">-- Warning message --</div>
+                <div className="body">
+                    You need to give right user information !
+                </div>
+                <div className="footer">
+                    <Button size="small" handleClick={closeModal}>Close</Button>
+                </div>
+            </Modal>
         </div>
     )
 }
